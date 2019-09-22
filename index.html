@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--Import Google Icon Font-->
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+      <script>
+        var app = angular.module("myApp", []);
+        app.controller("myCtrl", function($scope, $http, $window) {
+          
+          $scope.partnerss = [
+          {
+              "clientDesc":"a ascasc",
+              "clientId":"0",
+			  "redirectUrls":[
+                  "http://www.sgp.dbs.com/v1/rewards/summary/party1",
+                  "http://www.sgp.dbs.com/v1/rewards/summary/party2",
+                  "http://www.sgp.dbs.com/v1/rewards/summary/party3",
+                  "http://www.sgp.dbs.com/v1/rewards/summary/party4"
+                ]
+            },
+            {
+              "clientDesc":"b ascasc",
+              "clientId":"1",
+			  "redirectUrls":[
+                  "http://www.sgp.dbs.com/v1/rewards/summary/party1",
+                  "http://www.sgp.dbs.com/v1/rewards/summary/party2",
+                  "http://www.sgp.dbs.com/v1/rewards/summary/party3",
+                  "http://www.sgp.dbs.com/v1/rewards/summary/party4"
+                ]
+            },
+            {
+              "clientDesc":"c ascasc",
+              "clientId":"2",
+			  "redirectUrls":[
+                  "http://www.sgp.dbs.com/v1/rewards/summary/party1",
+                  "http://www.sgp.dbs.com/v1/rewards/summary/party2",
+                  "http://www.sgp.dbs.com/v1/rewards/summary/party3",
+                  "http://www.sgp.dbs.com/v1/rewards/summary/party4"
+                ]
+            },
+            {
+              "clientDesc":"d ascasc",
+              "clientId":"3",
+			  "redirectUrls":[
+                  "http://www.sgp.dbs.com/v1/rewards/summary/party1",
+                  "http://www.sgp.dbs.com/v1/rewards/summary/party2",
+                  "http://www.sgp.dbs.com/v1/rewards/summary/party3",
+                  "http://www.sgp.dbs.com/v1/rewards/summary/party4"
+                ]
+            },
+            {
+              "clientDesc":"e ascasc",
+              "clientId":"4",
+			  "redirectUrls":[
+                  "http://www.sgp.dbs.com/v1/rewards/summary/party1",
+                  "http://www.sgp.dbs.com/v1/rewards/summary/party2",
+                  "http://www.sgp.dbs.com/v1/rewards/summary/party3",
+                  "http://www.sgp.dbs.com/v1/rewards/summary/party4"
+                ]
+            },
+            {
+              "clientDesc":"f ascasc",
+              "clientId":"5",
+			  "redirectUrls":[
+                  "http://www.sgp.dbs.com/v1/rewards/summary/party1",
+                  "http://www.sgp.dbs.com/v1/rewards/summary/party2",
+                  "http://www.sgp.dbs.com/v1/rewards/summary/party3",
+                  "http://www.sgp.dbs.com/v1/rewards/summary/party4"
+                ]
+            },
+            {
+              "clientDesc":"g ascasc",
+              "clientId":"6",
+			  "redirectUrls":[
+                  "http://www.sgp.dbs.com/v1/rewards/summary/party1",
+                  "http://www.sgp.dbs.com/v1/rewards/summary/party2",
+                  "http://www.sgp.dbs.com/v1/rewards/summary/party3",
+                  "http://www.sgp.dbs.com/v1/rewards/summary/party4"
+                ]
+            }
+            ,
+            {
+              "clientDesc":"h ascasc",
+              "clientId":"7",
+			  "redirectUrls":[
+                  "http://www.sgp.dbs.com/v1/rewards/summary/party1",
+                  "http://www.sgp.dbs.com/v1/rewards/summary/party2",
+                  "http://www.sgp.dbs.com/v1/rewards/summary/party3",
+                  "http://www.sgp.dbs.com/v1/rewards/summary/party4"
+                ]
+            }
+            ,
+            {
+              "clientDesc":"i ascasc",
+              "clientId":"8",
+			  "redirectUrls":[
+                  "http://www.sgp.dbs.com/v1/rewards/summary/party1",
+                  "http://www.sgp.dbs.com/v1/rewards/summary/party2",
+                  "http://www.sgp.dbs.com/v1/rewards/summary/party3",
+                  "http://www.sgp.dbs.com/v1/rewards/summary/party4"
+                ]
+            }
+          ];
+          $scope.partner = {
+            "clientDesc":String,
+            "clientId": String,
+            "redirectUrls": []
+          }
+
+          $scope.showPartner = false;
+          $scope.showEdit = false;
+          $scope.showHome = true;
+          $scope.showAfter = false;
+          $scope.showHeader = false;
+          $scope.list = [];
+          $scope.clientId = "";
+
+          $scope.getPartnersList = function(){
+            //$http.get('http://date.jsontest.com/').then(
+              //function successCallback(response) {
+                  $scope.partners = $scope.partnerss;//response.data;
+              //},
+              //function errorCallback(response) {
+                alert("Unable to perform get request");
+              //}
+            //);
+          }
+
+          $scope.getRedirectUrlForClient = function(event){
+            var clientId = event.target.attributes.data.value;
+            $scope.clientId = clientId;
+            for(let index =0; index<$scope.partners.length; index++){
+              if($scope.partners.clientId = $scope.clientId){
+                $scope.partner = $scope.partners[index];
+              }
+            }
+            $scope.showPartner = true;
+            $scope.showHome = false;
+            $scope.showHeader = false;
+            $scope.showEdit = true;
+          }
+
+          $scope.updateRedirectURL = function(form){
+
+            if (confirm("Are you sure to update?")) {
+
+            $scope.length = $window.rowsCount;
+            var requestObject = {
+              "clientId":String,
+              "redirectUrls":[]
+            }
+            var arr = [];
+            for (let index = 0; index < $scope.length; index++) {
+              var value = angular.element(document.querySelector("#url"+index)).val();
+              $scope.list[index] = value;
+              console.log(value);
+            }
+            requestObject.clientId = $scope.clientId;
+            requestObject.redirectUrls = $scope.list;
+            console.log(requestObject.clientId+", " + requestObject.redirectUrls);
+
+            //$http.get('http://date.jsontest.com/', requestObject).then(
+              //function successCallback(response) {
+                $scope.partner = $scope.partners[0];//response.beforeUpdate;
+                $scope.partnerUpdate = $scope.partners[1];//response.afterUpdate;
+                alert("URL Updated Successully");
+              //},
+              //function errorCallback(response) {
+                alert("POST-ing of data failed");
+              //}
+            //);
+
+            $scope.showEdit = false;
+            $scope.showAfter = true;
+            $scope.showPartner = true;
+            $scope.showHeader = true;
+            
+          }
+        }
+          
+
+        });
+      </script>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+  <nav class=" teal lighten-2" role="navigation">
+    <div class="nav-wrapper container">
+      <a id="logo-container" href="index.html" class="brand-logo">DBS CORE API</a>
+      <ul class="right">
+          <li><a href="index.html"><i class="material-icons">home</i></a></li>
+        </ul>
+    </div>
+  </nav>
+    <div class="nothing">
+      <div id="homeSection" ng-show="showHome" class="row center show">
+          <br><br><br><br><br><br><br><br><br>
+        <a href = "#partnersModal" ng-show="true" ng-click = "getPartnersList()" id="getPartners" class="btn-large waves-effect waves-light teal lighten-2">
+          See Partners
+        </a>
+      </div>
+      <br><br>
+
+      <div id="partnersModal" class="modal">
+          <div class="modal-content center"><br><br><br>
+              <div ng-repeat = "partner in partners"ng-if="$index % 3 == 0" class="row">
+                  <div class="col s4"><a href="" style="padding: 10px;" ng-click="getRedirectUrlForClient($event)" data = "{{partners[$index].clientId}}" class="center teal white-text modal-action modal-close waves-effect">{{partners[$index].clientDesc | uppercase}}</a></div>
+                  <div class="col s4"><a href="" style="padding: 10px;" ng-click="getRedirectUrlForClient($event)" data = "{{partners[$index+1].clientId}}" class="center teal white-text modal-action modal-close waves-effect">{{partners[$index+1].clientDesc | uppercase}}</a></div>
+                  <div class="col s4"><a href="" style="padding: 10px;" ng-click="getRedirectUrlForClient($event)" data = "{{partners[$index+2].clientId}}" class="center teal white-text modal-action modal-close waves-effect">{{partners[$index+2].clientDesc | uppercase}}</a></div>
+              </div><br><br>
+              <div class="center"><h5>Please choose your partner</h5></div>
+          </div>
+      </div>
+
+      <div id="updateSection" class="row">
+        <div id = "viewPartner" class="col s6" ng-show="showPartner">
+        <div class="center blue lighten-3" ng-show="showHeader" style="padding: 10px;"><b><span class="white-text center">Before Update</span></b></div><br>
+          <table id="myTable" class=" table order-list">
+            <tbody>
+            <tr>
+              <td>
+                <b>Partner Name: </b>
+              </td>
+              <td>
+                <span class="red-text">{{partner.clientDesc}}</span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <b>Client Id</b>
+              </td>
+              <td>
+                <span class="red-text">{{partner.clientId}}</span>
+              </td>
+            </tr>
+            <tr>
+              <td style="vertical-align:top;">
+                <b>Whitelisted URL's</b>
+              </td>
+              <td>
+                <p ng-repeat = "url in partner.redirectUrls">{{url}}<br></p>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class = "col s6 right" ng-show="showEdit">
+            <br><br><b>Update Here:</b>
+          <form  name="updateForm">
+            <table name = "tableData" id="editSection">
+              <tbody>
+                  <tr id="addHere"></tr>
+              </tbody>
+            </table><br><br>
+            <div class="left"><a href="#!" class="" id="addrow"><i class="material-icons right">add</i></a></div>
+            <br><br>
+            <div class="center"><button class="btn" ng-click="updateRedirectURL(updateForm)" >Submit</button></div>
+        </form>
+        </div>
+
+        <div class="col s6" ng-show="showAfter">
+        <div class="center green lighten-3" style="padding: 10px;"><b><span class="white-text center">After Update</span></b></div><br>
+          <table>
+              <tbody>
+                  <tr>
+                    <td>
+                      <b>Partner Name: </b>
+                    </td>
+                    <td>
+                      <span class="red-text">{{partnerUpdate.clientDesc}}</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <b>Client Id</b>
+                    </td>
+                    <td>
+                      <span class="red-text">{{partnerUpdate.clientId}}</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="vertical-align:top;">
+                      <b>Whitelisted URL's</b>
+                    </td>
+                    <td>
+                      <p ng-repeat = "url in partnerUpdate.redirectUrls">{{url}}<br></p>
+                    </td>
+                  </tr>
+                  </tbody>
+          </table>   
+        </div>
+      </div>
+    </div>
+
+
+  <!--Import jQuery before materialize.js-->
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+  <script>
+    var rowsCount = 0; 
+    $(document).ready(function(){
+      $('.modal').modal();
+      var clipboard = new ClipboardJS('.clipboard');   
+    $("#addrow").on("click", function () {
+        var newRow = $("<tr>");
+        var cols = "";
+        cols += '<td><input id="url'+rowsCount+'" type="text" value="" size="70"/></td>';
+        cols += '<td><a href="#!" class="ibtnDel"><i class="material-icons">delete</i></td>';
+        newRow.append(cols);
+        $("#addHere").append(newRow);
+        rowsCount++;
+    });
+    $("#editSection").on("click", ".ibtnDel", function (event) {
+        $(this).closest("tr").remove();       
+        rowsCount--;
+    });       
+    });
+  </script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+  </body>
+</html>
